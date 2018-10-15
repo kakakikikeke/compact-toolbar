@@ -59,15 +59,18 @@ function restore() {
           var len = toolbar.children.length;
           var count = 1;
           toolbar.children.forEach(function(bookmark) {
-            browser.bookmarks.update(bookmark.id, {
-              title: data.backup.find(item => item.id === bookmark.id).title,
-              url: bookmark.url
-            }, function(r) {
-              count++;
-              if (count >= len) {
-                browser.browserAction.enable();
-              }
-            });
+            var b = data.backup.find(item => item.id === bookmark.id);
+            if (b !== undefined) {
+              browser.bookmarks.update(bookmark.id, {
+                title: b.title,
+                url: bookmark.url
+              }, function(r) {
+                count++;
+                if (count >= len) {
+                  browser.browserAction.enable();
+                }
+              });
+            }
           });
         }, onError)
       }
