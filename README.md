@@ -10,7 +10,7 @@ https://addons.mozilla.org/ja/firefox/addon/compact-toolbar/
 How to use it
 -------------
 
-![compact-toolbar-demo](https://1.bp.blogspot.com/-eMPvL75MqNM/W6RuQyJIdzI/AAAAAAAAdVg/FSvOO9r_YX4VUoxk4Nub7l8ptMEH1Tw3gCLcBGAs/s1600/compact_toolbar_demo.gif)
+![compact-toolbar-demo](https://2.bp.blogspot.com/-qpQJON8NLnM/XOj1wy1jxYI/AAAAAAAAf9c/FXW728UeqCUptPA909Qd_zJ52K1wjZTzwCLcBGAs/s1600/compact_toolbar_demo.gif)
 
 1. Click icon therefore toggle hide/show titles on bookmar toolbar.
 
