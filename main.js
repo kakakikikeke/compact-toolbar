@@ -29,8 +29,30 @@ function saveAndEmpty() {
   browser.bookmarks.getTree(function(results) {
     results[0].children.forEach(function(toolbar) {
       if (toolbar.id == id) {
+        var backup = [];
+        // Check bookmark title as empty
+        toolbar.children.forEach(function(bookmark) {
+          if (!bookmark.title) {
+            browser.storage.local.get("backup").then(function(data) {
+              var b = data.backup.find(item => item.id === bookmark.id);
+              if (b !== undefined) {
+                // Copy title if found from backup
+                bookmark.title = b.title;
+              }
+            }, onError);
+          }
+          backup.push(bookmark);
+        });
+        // Take the difference and push
+        browser.storage.local.get("backup").then(function(data) {
+          data.backup.concat(backup).forEach(item => {
+            if (data.backup.includes(item) && !backup.includes(item)) {
+              backup.push(item);
+            }
+          })
+        }, onError);
         browser.storage.local.set({
-          backup: toolbar.children
+          backup: backup
         }).then(function() {
           var len = toolbar.children.length;
           var count = 1;
