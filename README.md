@@ -12,7 +12,7 @@ How to use it
 
 ![compact-toolbar-demo](https://2.bp.blogspot.com/-qpQJON8NLnM/XOj1wy1jxYI/AAAAAAAAf9c/FXW728UeqCUptPA909Qd_zJ52K1wjZTzwCLcBGAs/s1600/compact_toolbar_demo.gif)
 
-1. Click icon therefore toggle hide/show titles on bookmar toolbar.
+1. Click icon ore press shoutcut key (Cmd+Shift+Y) therefore toggle hide/show titles on bookmar toolbar.
 
 Just to be sure please back up your bookmarks.  
 Because this addon is editing bookmark information directly.  

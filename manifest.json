@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "compact-toolbar",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "You can toggle as hide/show bookmark's titles on bookmark toolbar.",
   "icons": {
     "48": "icons/icon-48.png",
@@ -23,6 +23,14 @@
     "default_icon": {
       "19": "icons/icon-19-gray.png",
       "38": "icons/icon-38-gray.png"
+    }
+  },
+  "commands": {
+    "toggle-compact": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Send a 'toggle-compact' event"
     }
   }
 }
