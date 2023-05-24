@@ -2,7 +2,7 @@ var id = "toolbar_____";
 
 function isEmpty(obj) {
     for(var prop in obj) {
-        if(obj.hasOwnProperty(prop))
+        if(Object.prototype.hasOwnProperty.call(obj, prop))
             return false;
     }
     return JSON.stringify(obj) === JSON.stringify({});
@@ -60,7 +60,7 @@ function saveAndEmpty() {
             browser.bookmarks.update(bookmark.id, {
               title: "",
               url: bookmark.url
-            }, function(r) {
+            }, function() {
               count++;
               if (count >= len) {
                 browser.browserAction.enable();
@@ -86,7 +86,7 @@ function restore() {
               browser.bookmarks.update(bookmark.id, {
                 title: b.title,
                 url: bookmark.url
-              }, function(r) {
+              }, function() {
                 count++;
                 if (count >= len) {
                   browser.browserAction.enable();
