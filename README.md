@@ -1,14 +1,11 @@
-compact-toolbar
-===============
+# compact-toolbar
 You can toggle as hide/show bookmark's titles on bookmark toolbar.
 
-How to install
---------------
+## How to install
 Download addon from below URL.  
 https://addons.mozilla.org/ja/firefox/addon/compact-toolbar/
 
-How to use it
--------------
+## How to use it
 
 ![compact-toolbar-demo](https://2.bp.blogspot.com/-qpQJON8NLnM/XOj1wy1jxYI/AAAAAAAAf9c/FXW728UeqCUptPA909Qd_zJ52K1wjZTzwCLcBGAs/s1600/compact_toolbar_demo.gif)
 
@@ -18,7 +15,15 @@ Just to be sure please back up your bookmarks.
 Because this addon is editing bookmark information directly.  
 If the browser crashes while the add-on is manipulating bookmarks, the bookmark information may be wrong.
 
-Bug Report
------------
+## Bug Report
 
 Please sending an issue or pull-request on this repository.
+
+## Development
+### eslint
+* nvm use
+* npm i
+* npm run lint .
+
+### build
+* sh build.sh
