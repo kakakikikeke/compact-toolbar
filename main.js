@@ -56,14 +56,25 @@ function saveAndEmpty() {
         }).then(function() {
           var len = toolbar.children.length;
           var count = 1;
-          toolbar.children.forEach(function(bookmark) {
-            browser.bookmarks.update(bookmark.id, {
-              title: "",
-              url: bookmark.url
-            }, function() {
-              count++;
-              if (count >= len) {
-                browser.browserAction.enable();
+          browser.storage.local.get("hideFolderNames").then((config) => {
+            const hideFolders = config.hideFolderNames || false;
+            toolbar.children.forEach(function(bookmark) {
+              const isFolder = !bookmark.url;
+              if (!isFolder || (isFolder && hideFolders)) {
+                browser.bookmarks.update(bookmark.id, {
+                  title: "",
+                  url: bookmark.url
+                }, function() {
+                  count++;
+                  if (count >= len) {
+                    browser.browserAction.enable();
+                  }
+                });
+              } else {
+                count++;
+                if (count >= len) {
+                  browser.browserAction.enable();
+                }
               }
             });
           });

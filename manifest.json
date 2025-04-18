@@ -32,5 +32,9 @@
       },
       "description": "Send a 'toggle-compact' event"
     }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
   }
 }
