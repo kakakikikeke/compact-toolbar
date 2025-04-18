@@ -1,23 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const hideFolderNamesCheckbox = document.getElementById("hideFolderNames");
-  const setZerowidthSpaceCheckbox = document.getElementById("setZerowidthSpace");
+  const checkbox = document.getElementById("hideFolderNames");
 
   // 初期値を読み込む
-  browser.storage.local.get(["hideFolderNames", "setZerowidthSpace"]).then((result) => {
-    hideFolderNamesCheckbox.checked = result.hideFolderNames || false;
-    setZerowidthSpaceCheckbox.checked = result.setZerowidthSpace || false;
+  browser.storage.local.get("hideFolderNames").then((data) => {
+    checkbox.checked = data.hideFolderNames || false;
   });
 
   // 値が変更されたら保存
-  hideFolderNamesCheckbox.addEventListener("change", () => {
+  checkbox.addEventListener("change", () => {
     browser.storage.local.set({
-      hideFolderNames: hideFolderNamesCheckbox.checked
-    });
-  });
-
-  setZerowidthSpaceCheckbox.addEventListener("change", () => {
-    browser.storage.local.set({
-      setZerowidthSpace: setZerowidthSpaceCheckbox.checked
+      hideFolderNames: checkbox.checked
     });
   });
 });
