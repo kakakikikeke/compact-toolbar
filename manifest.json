@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "compact-toolbar",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "You can toggle as hide/show bookmark's titles on bookmark toolbar.",
   "icons": {
     "48": "icons/icon-48.png",
