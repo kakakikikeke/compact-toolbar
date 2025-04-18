@@ -56,13 +56,15 @@ function saveAndEmpty() {
         }).then(function() {
           var len = toolbar.children.length;
           var count = 1;
-          browser.storage.local.get("hideFolderNames").then((config) => {
+          browser.storage.local.get(["hideFolderNames", "setZerowidthSpace"]).then((config) => {
             const hideFolders = config.hideFolderNames || false;
+            const useZerowidth = config.setZerowidthSpace || false;
+            const newTitle = useZerowidth ? "\u200B" : "";
             toolbar.children.forEach(function(bookmark) {
               const isFolder = !bookmark.url;
               if (!isFolder || (isFolder && hideFolders)) {
                 browser.bookmarks.update(bookmark.id, {
-                  title: "",
+                  title: newTitle,
                   url: bookmark.url
                 }, function() {
                   count++;
