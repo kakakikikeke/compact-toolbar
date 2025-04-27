@@ -1,6 +1,6 @@
 {
   "name": "compact-toolbar",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "You can toggle as hide/show bookmark's titles on bookmark toolbar.",
   "main": "src/main.js",
   "scripts": {
