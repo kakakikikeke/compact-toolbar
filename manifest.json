@@ -8,7 +8,10 @@
     "96": "icons/icon-96.png"
   },
   "background": {
-    "scripts": ["main.js"]
+    "scripts": [
+      "src/compact-toolbar.js",
+      "src/main.js"
+    ]
   },
   "applications": {
     "gecko": {

@@ -16,11 +16,11 @@ function onError(error) {
 function changeIcon(mode) {
   browser.browserAction.setIcon({
     path: mode ? {
-      19: "icons/icon-19.png",
-      38: "icons/icon-38.png"
+      19: "../icons/icon-19.png",
+      38: "../icons/icon-38.png"
     } : {
-      19: "icons/icon-19-gray.png",
-      38: "icons/icon-38-gray.png"
+      19: "../icons/icon-19-gray.png",
+      38: "../icons/icon-38-gray.png"
     }
   });
 }
@@ -153,8 +153,23 @@ function toggleCompactWithKey(command) {
   }
 }
 
-browser.browserAction.onClicked.addListener(toggleCompact);
-browser.runtime.onUpdateAvailable.addListener(setup);
-browser.runtime.onInstalled.addListener(setup);
-browser.runtime.onStartup.addListener(setup);
-browser.commands.onCommand.addListener(toggleCompactWithKey);
+// Export for tests
+if (typeof module !== "undefined") {
+  module.exports = {
+    isEmpty,
+    changeIcon,
+    saveAndEmpty,
+    restore,
+    onGot,
+    toggleCompact,
+    setup,
+    toggleCompactWithKey
+  };
+}
+
+// Set functions to windows object for extension
+if (typeof window !== "undefined") {
+  window.toggleCompact = toggleCompact;
+  window.setup = setup;
+  window.toggleCompactWithKey = toggleCompactWithKey;
+}

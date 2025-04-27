@@ -13,19 +13,24 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-export default defineConfig([{
+export default defineConfig([
+  {
+    files: ["src/**/*.js", "test/**/*.js"],
     extends: compat.extends("eslint:recommended"),
 
     languageOptions: {
-        globals: {
-            ...globals.webextensions,
-            ...globals.browser,
-            ...globals.node,
-        },
+      globals: {
+        ...globals.webextensions,
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest,
+        importScripts: "readonly",
+      },
 
-        ecmaVersion: "latest",
-        sourceType: "module",
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
 
     rules: {},
-}]);
+  }
+]);

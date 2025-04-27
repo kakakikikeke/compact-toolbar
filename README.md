@@ -26,5 +26,8 @@ Please sending an issue or pull-request on this repository.
 * npm fund && npm audit fix
 * npm run lint .
 
+### test
+* npm run test
+
 ### build
 * sh build.sh

@@ -2,13 +2,16 @@
   "name": "compact-toolbar",
   "version": "1.5.0",
   "description": "You can toggle as hide/show bookmark's titles on bookmark toolbar.",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest"
   },
   "author": "kakakikikeke <cdl.yoshinaka@gmail.com>",
   "license": "MPL-2.0",
   "devDependencies": {
-    "eslint": "^9.23.0"
+    "eslint": "^9.23.0",
+    "jest": "^29.7.0",
+    "sinon": "^20.0.0"
   }
 }
