@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Save values if changed
   checkbox.addEventListener("change", () => {
     browser.storage.local.set({
-      hideFolderNames: checkbox.checked
+      hideFolderNames: checkbox.checked,
     });
   });
 });
@@ -32,20 +32,22 @@ document.getElementById("export-bookmarks").addEventListener("click", () => {
 });
 
 function escapeHtml(text) {
-  return text.replace(/&/g, "&amp;")
-             .replace(/"/g, "&quot;")
-             .replace(/</g, "&lt;")
-             .replace(/>/g, "&gt;");
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function generateBookmarkHTML(node) {
-  let html = '<!DOCTYPE NETSCAPE-Bookmark-file-1>\n';
-  html += '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n';
-  html += '<TITLE>Bookmarks</TITLE>\n';
-  html += '<H1>Bookmarks</H1>\n';
-  html += '<DL><p>\n';
+  let html = "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n";
+  html +=
+    '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n';
+  html += "<TITLE>Bookmarks</TITLE>\n";
+  html += "<H1>Bookmarks</H1>\n";
+  html += "<DL><p>\n";
   html += buildHTMLFromNode(node);
-  html += '</DL><p>\n';
+  html += "</DL><p>\n";
   return html;
 }
 

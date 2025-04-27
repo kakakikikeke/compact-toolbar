@@ -8,20 +8,14 @@
     "96": "icons/icon-96.png"
   },
   "background": {
-    "scripts": [
-      "src/compact-toolbar.js",
-      "src/main.js"
-    ]
+    "scripts": ["src/compact-toolbar.js", "src/main.js"]
   },
   "applications": {
     "gecko": {
       "id": "compact-toolbar@kakakikikeke.blogspot.com"
     }
   },
-  "permissions": [
-    "storage",
-    "bookmarks"
-  ],
+  "permissions": ["storage", "bookmarks"],
   "browser_action": {
     "default_icon": {
       "19": "icons/icon-19-gray.png",
