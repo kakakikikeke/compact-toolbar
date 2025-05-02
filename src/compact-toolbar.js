@@ -176,6 +176,7 @@ if (typeof module !== "undefined") {
     saveAndEmpty,
     restore,
     onGot,
+    onError,
     toggleCompact,
     setup,
     toggleCompactWithKey,
