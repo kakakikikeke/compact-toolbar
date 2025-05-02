@@ -1,12 +1,8 @@
 const {
   isEmpty,
   onError,
-  changeIcon,
   toggleCompact,
   setup,
-  onGot,
-  saveAndEmpty,
-  restore,
 } = require("../src/compact-toolbar");
 
 global.browser = {
