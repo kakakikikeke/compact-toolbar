@@ -26,8 +26,8 @@ Please sending an issue or pull-request on this repository.
 ### install
 
 - nvm use
-- npm i
-- npm fund && npm audit fix
+- npm install
+- npm audit
 
 ### format and lint
 

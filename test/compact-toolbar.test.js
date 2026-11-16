@@ -1,85 +1,102 @@
+const { beforeEach, describe, it } = require("node:test");
+const assert = require("node:assert/strict");
 const {
+  changeIcon,
   isEmpty,
   onError,
-  toggleCompact,
   setup,
+  toggleCompact,
 } = require("../src/compact-toolbar");
 
-global.browser = {
-  browserAction: {
-    enable: jest.fn(),
-    disable: jest.fn(),
-    setIcon: jest.fn(),
-  },
-  storage: {
-    local: {
-      get: jest.fn(),
-      set: jest.fn(),
-    },
-  },
-  bookmarks: {
-    getTree: jest.fn(),
-    update: jest.fn(),
-  },
-};
+function mockFn(implementation = () => {}) {
+  const calls = [];
+  const fn = (...args) => {
+    calls.push(args);
+    return implementation(...args);
+  };
+  fn.calls = calls;
+  return fn;
+}
 
 describe("compact-toolbar", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    browser.storage.local.get.mockResolvedValue({ mode: true });
-    browser.storage.local.set.mockResolvedValue();
-  });
-
-  test("isEmpty returns true for empty object", () => {
-    expect(isEmpty({})).toBe(true);
-  });
-
-  test("isEmpty returns false for non-empty object", () => {
-    expect(isEmpty({ key: "value" })).toBe(false);
-  });
-
-  test("onError enables browserAction and logs error", () => {
-    const consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
-    onError("error occurred");
-    expect(browser.browserAction.enable).toHaveBeenCalled();
-    expect(consoleSpy).toHaveBeenCalledWith("error occurred");
-    consoleSpy.mockRestore();
-  });
-
-  test("changeIcon sets icon with correct path when mode is true", () => {
-    const originalChangeIcon = jest.requireActual(
-      "../src/compact-toolbar",
-    ).changeIcon;
-    originalChangeIcon(true);
-    expect(browser.browserAction.setIcon).toHaveBeenCalledWith({
-      path: {
-        19: "../icons/icon-19.png",
-        38: "../icons/icon-38.png",
+    global.browser = {
+      browserAction: {
+        enable: mockFn(),
+        disable: mockFn(),
+        setIcon: mockFn(),
       },
-    });
-  });
-
-  test("changeIcon sets icon with correct path when mode is false", () => {
-    const originalChangeIcon = jest.requireActual(
-      "../src/compact-toolbar",
-    ).changeIcon;
-    originalChangeIcon(false);
-    expect(browser.browserAction.setIcon).toHaveBeenCalledWith({
-      path: {
-        19: "../icons/icon-19-gray.png",
-        38: "../icons/icon-38-gray.png",
+      storage: {
+        local: {
+          get: mockFn(async () => ({ mode: true })),
+          set: mockFn(async () => {}),
+        },
       },
-    });
+      bookmarks: {
+        getTree: mockFn(),
+        update: mockFn(),
+      },
+    };
   });
 
-  test("setup sets icon if mode is in local storage", async () => {
+  it("isEmpty returns true for empty object", () => {
+    assert.equal(isEmpty({}), true);
+  });
+
+  it("isEmpty returns false for non-empty object", () => {
+    assert.equal(isEmpty({ key: "value" }), false);
+  });
+
+  it("onError enables browserAction and logs error", () => {
+    const originalLog = console.log;
+    const consoleSpy = mockFn();
+    console.log = consoleSpy;
+    try {
+      onError("error occurred");
+    } finally {
+      console.log = originalLog;
+    }
+
+    assert.equal(browser.browserAction.enable.calls.length, 1);
+    assert.deepEqual(consoleSpy.calls, [["error occurred"]]);
+  });
+
+  it("changeIcon sets icon with correct path when mode is true", () => {
+    changeIcon(true);
+    assert.deepEqual(browser.browserAction.setIcon.calls, [
+      [
+        {
+          path: {
+            19: "../icons/icon-19.png",
+            38: "../icons/icon-38.png",
+          },
+        },
+      ],
+    ]);
+  });
+
+  it("changeIcon sets icon with correct path when mode is false", () => {
+    changeIcon(false);
+    assert.deepEqual(browser.browserAction.setIcon.calls, [
+      [
+        {
+          path: {
+            19: "../icons/icon-19-gray.png",
+            38: "../icons/icon-38-gray.png",
+          },
+        },
+      ],
+    ]);
+  });
+
+  it("setup sets icon if mode is in local storage", async () => {
     await setup();
-    expect(browser.browserAction.setIcon).toHaveBeenCalled();
+    assert.equal(browser.browserAction.setIcon.calls.length, 1);
   });
 
-  test("toggleCompact disables browserAction and gets mode", () => {
+  it("toggleCompact disables browserAction and gets mode", () => {
     toggleCompact();
-    expect(browser.browserAction.disable).toHaveBeenCalled();
-    expect(browser.storage.local.get).toHaveBeenCalledWith("mode");
+    assert.equal(browser.browserAction.disable.calls.length, 1);
+    assert.deepEqual(browser.storage.local.get.calls, [["mode"]]);
   });
 });
